@@ -10,6 +10,7 @@ body {
   overflow-x: hidden;
   background: #020202;
   color: #f0f0f0;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
 }
 
 *,
@@ -275,10 +276,12 @@ input[type="range"]::-webkit-slider-thumb {
   }
 }
 
-/* Niche icon grid: 6-col → 3-col on tablet → 3-col on mobile */
+/* Niche icon row: centered, wraps on smaller viewports */
 .niche-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   gap: 8px;
 }
 
@@ -331,7 +334,8 @@ input[type="range"]::-webkit-slider-thumb {
   }
 
   .niche-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px;
+    justify-content: center;
   }
 
   .niche-content-grid {

@@ -28,7 +28,7 @@ export default function TerminalSection() {
       <div>
         <div className="section-badge reveal" style={{ marginBottom: 24, width: "fit-content" }}>Tech moat</div>
 
-        <h2 className="reveal" style={{ fontFamily: "var(--font-syne), sans-serif", fontWeight: 800, fontSize: "clamp(22px,3.5vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0 0 16px" }}>
+        <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(22px,3.5vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0 0 16px" }}>
           Your first question:
           <br />
           <span style={{ color: GREEN }}>&ldquo;What about bots?&rdquo;</span>

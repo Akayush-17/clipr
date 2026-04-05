@@ -75,7 +75,7 @@ export default function WaitlistForm() {
         <div style={{ width: 56, height: 56, borderRadius: 14, background: "rgba(249,115,22,0.08)", border: "1px solid rgba(249,115,22,0.18)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 18px" }}>
           <svg width="24" height="24" viewBox="0 0 26 26" fill="none"><path d="M4 13l5 5 13-11" stroke={ORANGE} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </div>
-        <div style={{ fontFamily: "var(--font-syne), sans-serif", fontSize: 22, fontWeight: 800, marginBottom: 8, color: CREAM, letterSpacing: -0.5 }}>
+        <div style={{ fontFamily: "var(--font-montserrat), sans-serif", fontSize: 22, fontWeight: 800, marginBottom: 8, color: CREAM, letterSpacing: -0.5 }}>
           You&apos;re on the list!
         </div>
         <div style={{ fontSize: 14, color: TEXT_SECONDARY, lineHeight: 1.65 }}>
@@ -196,7 +196,7 @@ export default function WaitlistForm() {
         <span style={{ color: TEXT_SECONDARY }}>Early beta:</span> 100% of bounties go to clippers.
       </p>
 
-      <button onClick={submit} className="cta-pill accent" style={{ width: "100%", height: 52, justifyContent: "center", fontFamily: "var(--font-syne), sans-serif", fontWeight: 700, fontSize: 16 }}>
+      <button onClick={submit} className="cta-pill accent" style={{ width: "100%", height: 52, justifyContent: "center", fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 700, fontSize: 16 }}>
         Claim My Spot
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </button>

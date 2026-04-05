@@ -105,7 +105,7 @@ export default function ClipperPOVSection() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
             {[["₹1,276", "This week", GREEN], ["₹6,840", "This month", ORANGE]].map(([v, l, c]) => (
               <div key={l} style={{ background: "#171717", border: `1px solid ${BORDER}`, borderRadius: 10, padding: "12px", textAlign: "center" as const }}>
-                <div style={{ fontFamily: "var(--font-syne), sans-serif", fontWeight: 800, fontSize: 18, color: c }}>{v}</div>
+                <div style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: 18, color: c }}>{v}</div>
                 <div style={{ fontSize: 10, color: TEXT_MUTED, marginTop: 3 }}>{l}</div>
               </div>
             ))}
@@ -122,7 +122,7 @@ export default function ClipperPOVSection() {
     <section ref={sectionRef as any} style={{ maxWidth: 1120, margin: "0 auto", padding: "96px 24px" }}>
       <div className="section-badge reveal" style={{ marginBottom: 28 }}>Clipper&apos;s perspective</div>
 
-      <h2 className="reveal" style={{ fontFamily: "var(--font-syne), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", marginBottom: 10, lineHeight: "120%", color: CREAM, margin: "0 0 10px" }}>
+      <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", marginBottom: 10, lineHeight: "120%", color: CREAM, margin: "0 0 10px" }}>
         A day in the life of <span style={{ color: GREEN }}>a Clipper</span>
       </h2>
       <p style={{ fontSize: 15, color: TEXT_SECONDARY, marginBottom: 44, lineHeight: 1.65, maxWidth: 500 }}>
@@ -149,7 +149,7 @@ export default function ClipperPOVSection() {
             </div>
             <div style={{ fontSize: 11, color: TEXT_MUTED, fontWeight: 600, letterSpacing: "1.2px", textTransform: "uppercase" }}>Step {step + 1} of 4</div>
           </div>
-          <h3 style={{ fontFamily: "var(--font-syne), sans-serif", fontWeight: 700, fontSize: 21, letterSpacing: "-0.02em", color: CREAM, lineHeight: 1.22, margin: "0 0 12px" }}>{steps[step].title}</h3>
+          <h3 style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 700, fontSize: 21, letterSpacing: "-0.02em", color: CREAM, lineHeight: 1.22, margin: "0 0 12px" }}>{steps[step].title}</h3>
           <p style={{ fontSize: 15, color: TEXT_SECONDARY, lineHeight: 1.75, margin: 0 }}>{steps[step].desc}</p>
         </div>
 

@@ -17,7 +17,7 @@ export default function Footer() {
     >
       <div
         style={{
-          fontFamily: "var(--font-syne), sans-serif",
+          fontFamily: "var(--font-montserrat), sans-serif",
           fontWeight: 800,
           fontSize: 18,
           letterSpacing: -0.8,

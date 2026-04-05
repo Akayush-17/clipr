@@ -60,7 +60,7 @@ export default function VsUGCSection({ isCreator }: Props) {
           Why Clipr is different
         </div>
 
-        <h2 className="reveal" style={{ fontFamily: "var(--font-syne), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0 0 12px" }}>
+        <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0 0 12px" }}>
           The old way vs <span style={{ color: ORANGE }}>the Clipr way</span>
         </h2>
         <p className="reveal" style={{ fontSize: 15, color: TEXT_SECONDARY, lineHeight: 1.65, maxWidth: 560, margin: "0 auto" }}>

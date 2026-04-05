@@ -109,7 +109,7 @@ export default function HowItWorksSection() {
           <div style={{ display: "flex", gap: 6 }}>
             {[["₹3,378", "Clipper payouts", GREEN], ["₹845", "Platform fee", TEXT_MUTED], ["₹45,777", "Creator saved", ORANGE]].map(([v, l, c]) => (
               <div key={l} style={{ flex: 1, background: "#171717", borderRadius: 8, padding: "8px 6px", textAlign: "center" as const, border: `1px solid ${BORDER}` }}>
-                <div style={{ fontWeight: 700, fontSize: 14, color: c, fontFamily: "var(--font-syne), sans-serif" }}>{v}</div>
+                <div style={{ fontWeight: 700, fontSize: 14, color: c, fontFamily: "var(--font-montserrat), sans-serif" }}>{v}</div>
                 <div style={{ fontSize: 9, color: TEXT_MUTED, marginTop: 3 }}>{l}</div>
               </div>
             ))}
@@ -132,7 +132,7 @@ export default function HowItWorksSection() {
     <section ref={sectionRef as any} id="how-it-works" style={{ maxWidth: 1120, margin: "0 auto", padding: "64px 24px 96px" }}>
       <div style={{ textAlign: "center", marginBottom: 56 }}>
         <div className="section-badge reveal" style={{ marginBottom: 24 }}>The lifecycle of a clip</div>
-        <h2 className="reveal" style={{ fontFamily: "var(--font-syne), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0" }}>
+        <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0" }}>
           From bounty to <span style={{ color: ORANGE }}>bank account</span>
         </h2>
       </div>
@@ -182,7 +182,7 @@ export default function HowItWorksSection() {
 
             {/* Text column */}
             <div style={{ padding: "24px 28px", display: "flex", flexDirection: "column", justifyContent: "center", borderRight: `1px solid ${BORDER}` }}>
-              <h3 style={{ fontFamily: "var(--font-syne), sans-serif", fontSize: 18, fontWeight: 700, letterSpacing: "-0.02em", color: CREAM, margin: "0 0 8px" }}>{s.title}</h3>
+              <h3 style={{ fontFamily: "var(--font-montserrat), sans-serif", fontSize: 18, fontWeight: 700, letterSpacing: "-0.02em", color: CREAM, margin: "0 0 8px" }}>{s.title}</h3>
               <p style={{ fontSize: 14, color: TEXT_SECONDARY, lineHeight: 1.65, margin: 0 }}>{s.desc}</p>
             </div>
 

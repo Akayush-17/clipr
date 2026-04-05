@@ -121,7 +121,7 @@ export default function Hero({ role, onRoleChange }: Props) {
       <h1
         className="hero-headline"
         style={{
-          fontFamily: "var(--font-syne), sans-serif",
+          fontFamily: "var(--font-montserrat), sans-serif",
           fontWeight: 800,
           fontSize: "clamp(36px, 6vw, 60px)",
           lineHeight: "110%",
@@ -181,7 +181,7 @@ export default function Hero({ role, onRoleChange }: Props) {
           onClick={handleScrollToWaitlist}
           className={`cta-pill ${isCreator ? "accent" : "accent-green"}`}
           style={{
-            fontFamily: "var(--font-syne), sans-serif",
+            fontFamily: "var(--font-montserrat), sans-serif",
             fontWeight: 700,
             fontSize: 15,
             height: 50,
@@ -325,7 +325,7 @@ function DashboardMockInline() {
       </div>
       <div style={{ padding: 16 }}>
         <div style={{ fontSize: 11, color: "#424242", marginBottom: 4 }}>Total Reach · Campaign #47</div>
-        <div style={{ fontFamily: "var(--font-syne), sans-serif", fontSize: 28, fontWeight: 800, color: "#f97316", lineHeight: 1, marginBottom: 6 }}>
+        <div style={{ fontFamily: "var(--font-montserrat), sans-serif", fontSize: 28, fontWeight: 800, color: "#f97316", lineHeight: 1, marginBottom: 6 }}>
           4,82,310
         </div>
         <div style={{ fontSize: 11, color: "#7aff78", marginBottom: 16 }}>↑ 12.4% from yesterday</div>
@@ -419,7 +419,7 @@ function MobileMockInline() {
             </div>
             <div>
               <div style={{ fontSize: 11, color: "#939393" }}>{n.txt}</div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: n.color, fontFamily: "var(--font-syne), sans-serif", marginTop: 2 }}>{n.amt}</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: n.color, fontFamily: "var(--font-montserrat), sans-serif", marginTop: 2 }}>{n.amt}</div>
             </div>
           </div>
         ))}

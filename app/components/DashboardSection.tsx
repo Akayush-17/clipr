@@ -18,7 +18,7 @@ export default function DashboardSection() {
     <section ref={sectionRef as any} id="dashboard" style={{ maxWidth: 1120, margin: "0 auto", padding: "96px 24px" }}>
       <div style={{ textAlign: "center", marginBottom: 48 }}>
         <div className="section-badge reveal" style={{ marginBottom: 24 }}>Sneak peek</div>
-        <h2 className="reveal" style={{ fontFamily: "var(--font-syne), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0 0 12px" }}>
+        <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0 0 12px" }}>
           Here&apos;s what your <span style={{ color: ORANGE }}>dashboard</span> will look like
         </h2>
         <p className="reveal" style={{ fontSize: 15, color: TEXT_SECONDARY, lineHeight: 1.65, maxWidth: 520, margin: "0 auto" }}>
@@ -32,7 +32,7 @@ export default function DashboardSection() {
           {/* Campaign header bar */}
           <div style={{ background: "#171717", padding: "14px 24px", borderBottom: `1px solid ${BORDER}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-              <div style={{ fontFamily: "var(--font-syne), sans-serif", fontWeight: 700, fontSize: 15, color: CREAM }}>
+              <div style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 700, fontSize: 15, color: CREAM }}>
                 Campaign #47
               </div>
               <span style={{ fontSize: 12, color: TEXT_MUTED }}>Tech Podcast Clips</span>
@@ -53,7 +53,7 @@ export default function DashboardSection() {
               ["47", "Active Clips", "#6ccdfb"],
             ].map(([v, l, c], i) => (
               <div key={l} style={{ padding: "20px 24px", borderRight: i < 3 ? `1px solid ${BORDER}` : undefined }}>
-                <div style={{ fontFamily: "var(--font-syne), sans-serif", fontWeight: 800, fontSize: 24, color: c, letterSpacing: -0.5, lineHeight: 1, marginBottom: 6 }}>{v}</div>
+                <div style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: 24, color: c, letterSpacing: -0.5, lineHeight: 1, marginBottom: 6 }}>{v}</div>
                 <div style={{ fontSize: 11, color: TEXT_MUTED, letterSpacing: "0.02em" }}>{l}</div>
               </div>
             ))}

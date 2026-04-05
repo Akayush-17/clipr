@@ -87,7 +87,7 @@ export default function NavBar() {
         {/* Logo */}
         <div
           style={{
-            fontFamily: "var(--font-syne), sans-serif",
+            fontFamily: "var(--font-montserrat), sans-serif",
             fontWeight: 800,
             fontSize: 16,
             letterSpacing: -0.8,

@@ -12,6 +12,7 @@ import HowItWorksSection from "./HowItWorksSection";
 import TerminalSection from "./TerminalSection";
 import WaitlistSection from "./WaitlistSection";
 import MidCTA from "./MidCTA";
+import PromoVideoSection from "./PromoVideoSection";
 import Footer from "./Footer";
 
 export default function Landing() {
@@ -24,12 +25,13 @@ export default function Landing() {
         minHeight: "100vh",
         background: BG,
         color: CREAM,
-        fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+        fontFamily: "var(--font-montserrat), system-ui, sans-serif",
       }}
     >
       <NavBar />
       <main>
         <Hero role={role} onRoleChange={setRole} />
+        <PromoVideoSection />
         <ForWhomSection isCreator={isCreator} />
         <MidCTA isCreator={isCreator} />
         {isCreator ? <DashboardSection /> : <ClipperPOVSection />}
