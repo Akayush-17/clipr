@@ -1,6 +1,19 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { CREAM, GREEN, ORANGE, BORDER, TEXT_SECONDARY, TEXT_MUTED } from "../constants/theme";
+
+const VS_SECTION_MOBILE_MQ = "(max-width: 768px)";
+
+function subscribeVsSectionMobile(callback: () => void) {
+  const mq = window.matchMedia(VS_SECTION_MOBILE_MQ);
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+
+function snapshotVsSectionMobile() {
+  return typeof window !== "undefined" && window.matchMedia(VS_SECTION_MOBILE_MQ).matches;
+}
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
 type Row = { feature: string; old: string; clipr: string };
@@ -52,10 +65,25 @@ type Props = { isCreator: boolean };
 export default function VsUGCSection({ isCreator }: Props) {
   const sectionRef = useScrollReveal();
   const rows = isCreator ? CREATOR_ROWS : CLIPPER_ROWS;
+  const isVsMobile = useSyncExternalStore(subscribeVsSectionMobile, snapshotVsSectionMobile, () => false);
 
   return (
-    <section ref={sectionRef as any} className="landing-section-pad" style={{ maxWidth: 1120, margin: "0 auto" }}>
-      <div style={{ textAlign: "center", marginBottom: 48 }}>
+    <section
+      ref={sectionRef as any}
+      className="landing-section-pad"
+      style={{
+        maxWidth: 1120,
+        margin: "0 auto",
+        ...(isVsMobile ? { paddingLeft: 0, paddingRight: 0 } : {}),
+      }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          marginBottom: 48,
+          ...(isVsMobile ? { paddingLeft: 24, paddingRight: 24 } : {}),
+        }}
+      >
         <div className="section-badge reveal" style={{ marginBottom: 24 }}>
           Why Clipr is different
         </div>
@@ -73,7 +101,7 @@ export default function VsUGCSection({ isCreator }: Props) {
       </div>
 
       {/* Table inside an antigrid-card */}
-      <div className="antigrid-card reveal-card" style={{ padding: 0, overflow: "hidden" }}>
+      <div className="antigrid-card antigrid-card--mobile-square reveal-card" style={{ padding: 0, overflow: "hidden" }}>
         {/* Header row */}
         <div className="grid-3col" style={{ display: "grid", gridTemplateColumns: "0.8fr 1fr 1fr", background: "#171717", padding: "16px 28px", gap: 8, borderBottom: `2px solid ${BORDER}` }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: TEXT_MUTED, letterSpacing: "0.06em", textTransform: "uppercase" }}></div>

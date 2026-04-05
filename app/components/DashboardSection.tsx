@@ -15,8 +15,13 @@ export default function DashboardSection() {
   ];
 
   return (
-    <section ref={sectionRef as any} id="dashboard" className="landing-section-pad" style={{ maxWidth: 1120, margin: "0 auto" }}>
-      <div style={{ textAlign: "center", marginBottom: 48 }}>
+    <section
+      ref={sectionRef as any}
+      id="dashboard"
+      className="landing-section-pad"
+      style={{ maxWidth: 1120, margin: "0 auto", paddingLeft: 0, paddingRight: 0 }}
+    >
+      <div style={{ textAlign: "center", marginBottom: 48, paddingLeft: 24, paddingRight: 24 }}>
         <div className="section-badge reveal" style={{ marginBottom: 24 }}>Sneak peek</div>
         <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0 0 12px" }}>
           Here&apos;s what your <span style={{ color: ORANGE }}>dashboard</span> will look like
@@ -28,7 +33,7 @@ export default function DashboardSection() {
 
       {/* Dashboard mock — full-width card with fade overlay */}
       <div style={{ position: "relative" }}>
-        <div className="antigrid-card" style={{ padding: 0, overflow: "hidden" }}>
+        <div className="antigrid-card antigrid-card--mobile-square" style={{ padding: 0, overflow: "hidden" }}>
           {/* Campaign header bar */}
           <div style={{ background: "#171717", padding: "14px 24px", borderBottom: `1px solid ${BORDER}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -95,6 +100,7 @@ export default function DashboardSection() {
 
         {/* Fade-out gradient overlay at the bottom */}
         <div
+          className="dashboard-sneak-fade"
           style={{
             position: "absolute",
             bottom: 0,
@@ -103,7 +109,6 @@ export default function DashboardSection() {
             height: 160,
             background: `linear-gradient(to top, ${BG} 0%, ${BG}cc 40%, transparent 100%)`,
             pointerEvents: "none",
-            borderRadius: "0 0 16px 16px",
           }}
         />
 

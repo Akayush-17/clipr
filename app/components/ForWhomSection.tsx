@@ -159,6 +159,7 @@ function YoutubeEmbed({ videoId, title }: { videoId: string; title: string }) {
 }
 
 const NICHE_PILL_MQ = "(max-width: 900px)";
+const FOR_WHOM_CONTENT_MQ = "(max-width: 768px)";
 
 function subscribeCompactNichePills(callback: () => void) {
   const mq = window.matchMedia(NICHE_PILL_MQ);
@@ -170,6 +171,27 @@ function snapshotCompactNichePills() {
   return typeof window !== "undefined" && window.matchMedia(NICHE_PILL_MQ).matches;
 }
 
+function subscribeForWhomMobileContent(callback: () => void) {
+  const mq = window.matchMedia(FOR_WHOM_CONTENT_MQ);
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+
+function snapshotForWhomMobileContent() {
+  return typeof window !== "undefined" && window.matchMedia(FOR_WHOM_CONTENT_MQ).matches;
+}
+
+type NicheBlock = {
+  label: string;
+  color: string;
+  pain: string;
+  fix: string;
+  metric: string;
+  clips: readonly string[];
+  /** Shorter copy for narrow screens — pain, fix, and fewer bullets */
+  mobile: { pain: string; fix: string; clips: readonly string[] };
+};
+
 export default function ForWhomSection({ isCreator }: Props) {
   const [active, setActive] = useState(0);
   const sectionRef = useScrollReveal();
@@ -178,27 +200,154 @@ export default function ForWhomSection({ isCreator }: Props) {
     snapshotCompactNichePills,
     () => false,
   );
+  const compactForWhomContent = useSyncExternalStore(
+    subscribeForWhomMobileContent,
+    snapshotForWhomMobileContent,
+    () => false,
+  );
 
-  const creatorNiches = [
-    { label: "Gamers", color: "#8b5cf6", pain: "Your best clutch moments never get seen beyond your stream.", fix: "Clippers cut your highlights into Reels & Shorts. Every kill, every win — on 50 channels overnight.", metric: "Avg +2.4L views per campaign", clips: ["Best kills compilation", "Tutorial clips", "Reaction shorts", "Stream highlights"] },
-    { label: "Podcasters", color: ORANGE, pain: "Long-form episodes don't travel. You lose the 90% who won't watch 2 hours.", fix: "Clippers extract your sharpest 60-second takes and push them to the audiences who'll binge your full episodes.", metric: "Avg 3.1x listener growth", clips: ["Hot takes", "Controversial quotes", "Advice moments", "Funny exchanges"] },
-    { label: "Streamers", color: "#06b6d4", pain: "Your stream VODs die in 24 hours. YouTube clips help but you don't have time to edit.", fix: "Clippers watch your VODs, find the moments, and post them. You just keep streaming.", metric: "Avg 18+ clips per stream", clips: ["Rage moments", "Big wins", "Viewer interactions", "Hype clips"] },
-    { label: "News", color: GREEN, pain: "Breaking news dies in the feed within hours. Mobile audiences are on Reels, not YouTube.", fix: "Set micro-bounties on breaking stories. Clippers distribute 30-second summaries to short-form audiences instantly.", metric: "Avg 4.8x faster reach", clips: ["Breaking summaries", "Expert bytes", "Live clips", "Explainers"] },
-    { label: "Music", color: "#ec4899", pain: "New songs need viral moments. Music labels charge 2-5L for a single campaign.", fix: "Set a song clip bounty. Clippers make lip-sync clips, dance covers, and music moments — you pay per view.", metric: "Avg 8L streams per 15k", clips: ["Lyric moments", "Hook clips", "Dance trends", "Behind the studio"] },
+  const creatorNiches: NicheBlock[] = [
+    {
+      label: "Gamers",
+      color: "#8b5cf6",
+      pain: "Your best clutch moments never get seen beyond your stream.",
+      fix: "Clippers cut your highlights into Reels & Shorts. Every kill, every win — on 50 channels overnight.",
+      metric: "Avg +2.4L views per campaign",
+      clips: ["Best kills compilation", "Tutorial clips", "Reaction shorts", "Stream highlights"],
+      mobile: {
+        pain: "Your best moments rarely leave the stream.",
+        fix: "Clippers ship highlights as Shorts & Reels across channels.",
+        clips: ["Kill comps & tutorials", "Stream highlights"],
+      },
+    },
+    {
+      label: "Podcasters",
+      color: ORANGE,
+      pain: "Long-form episodes don't travel. You lose the 90% who won't watch 2 hours.",
+      fix: "Clippers extract your sharpest 60-second takes and push them to the audiences who'll binge your full episodes.",
+      metric: "Avg 3.1x listener growth",
+      clips: ["Hot takes", "Controversial quotes", "Advice moments", "Funny exchanges"],
+      mobile: {
+        pain: "Long episodes miss the scrolling audience.",
+        fix: "Sharp 60s cuts funnel listeners to full episodes.",
+        clips: ["Hot takes", "Quotable moments"],
+      },
+    },
+    {
+      label: "Streamers",
+      color: "#06b6d4",
+      pain: "Your stream VODs die in 24 hours. YouTube clips help but you don't have time to edit.",
+      fix: "Clippers watch your VODs, find the moments, and post them. You just keep streaming.",
+      metric: "Avg 18+ clips per stream",
+      clips: ["Rage moments", "Big wins", "Viewer interactions", "Hype clips"],
+      mobile: {
+        pain: "VODs fade fast; you can't edit it all.",
+        fix: "Clippers pull moments from VODs—you keep going live.",
+        clips: ["Hype & rage", "Big wins"],
+      },
+    },
+    {
+      label: "News",
+      color: GREEN,
+      pain: "Breaking news dies in the feed within hours. Mobile audiences are on Reels, not YouTube.",
+      fix: "Set micro-bounties on breaking stories. Clippers distribute 30-second summaries to short-form audiences instantly.",
+      metric: "Avg 4.8x faster reach",
+      clips: ["Breaking summaries", "Expert bytes", "Live clips", "Explainers"],
+      mobile: {
+        pain: "Breaking stories miss short-form feeds.",
+        fix: "Bounties → fast 30s cuts to Reels-scale reach.",
+        clips: ["Breaking bytes", "Quick explainers"],
+      },
+    },
+    {
+      label: "Music",
+      color: "#ec4899",
+      pain: "New songs need viral moments. Music labels charge 2-5L for a single campaign.",
+      fix: "Set a song clip bounty. Clippers make lip-sync clips, dance covers, and music moments — you pay per view.",
+      metric: "Avg 8L streams per 15k",
+      clips: ["Lyric moments", "Hook clips", "Dance trends", "Behind the studio"],
+      mobile: {
+        pain: "Organic virality is expensive via traditional promos.",
+        fix: "Per-view bounties: clippers scale hooks & dance trends.",
+        clips: ["Hook clips", "Trend-ready cuts"],
+      },
+    },
   ];
 
-  const clipperNiches = [
-    { label: "Gaming", color: "#8b5cf6", pain: "Gaming clips are the easiest to make go viral — reaction hooks, clutch moments, rage edits.", fix: "Find gaming bounties, clip the best 30-second moments from VODs, and post on your Reels.", metric: "Avg 7/1k views", clips: ["Pick campaigns with 4hr+ VODs", "Look for clutch moments & big wins", "Short vertical cuts with hooks", "Post across Reels + Shorts"] },
-    { label: "Podcasts", color: ORANGE, pain: "Podcast clips are underrated — a sharp 45-second opinion can blow up overnight.", fix: "Find the most opinionated or controversial moment. Clip it, add captions, post.", metric: "Avg 6/1k views", clips: ["Scan for strong opinions", "Add bold captions", "One hook in the first 3s", "Finance & tech pay highest"] },
-    { label: "Streamers", color: "#06b6d4", pain: "Streamers go live for hours — most clippers ignore them. That's your edge.", fix: "Watch stream VODs, find the hype moments, and post fast. The first clipper to post a moment wins.", metric: "Avg 7/1k views", clips: ["Check VODs within 6 hours", "Hype & rage clips work best", "Keep it under 30s", "Use their catchphrases"] },
-    { label: "News", color: GREEN, pain: "News clips pay fast — short campaigns, quick turnaround, and breaking content always gets views.", fix: "News micro-bounties open and close within hours. These are small clips (15-30 sec) with fast payouts.", metric: "Avg 5/1k views", clips: ["Enable push alerts", "Keep edits minimal", "Post within 2 hours", "Subtitles essential"] },
-    { label: "Music", color: "#ec4899", pain: "Music clips are fun, fast to make, and the algo loves them.", fix: "Clip the catchiest 15-30 seconds. Post as Reel using original audio. Trending audio = passive earning.", metric: "Avg 8/1k views", clips: ["Use original audio track", "Clip the hook/chorus", "Dance trends perform best", "Longest earning tail"] },
+  const clipperNiches: NicheBlock[] = [
+    {
+      label: "Gaming",
+      color: "#8b5cf6",
+      pain: "Gaming clips are the easiest to make go viral — reaction hooks, clutch moments, rage edits.",
+      fix: "Find gaming bounties, clip the best 30-second moments from VODs, and post on your Reels.",
+      metric: "Avg 7/1k views",
+      clips: ["Pick campaigns with 4hr+ VODs", "Look for clutch moments & big wins", "Short vertical cuts with hooks", "Post across Reels + Shorts"],
+      mobile: {
+        pain: "Gaming VODs are full of viral 30s beats.",
+        fix: "Grab bounties, cut vertical hooks, post fast.",
+        clips: ["Clutch & rage hooks", "Cross-post Shorts"],
+      },
+    },
+    {
+      label: "Podcasts",
+      color: ORANGE,
+      pain: "Podcast clips are underrated — a sharp 45-second opinion can blow up overnight.",
+      fix: "Find the most opinionated or controversial moment. Clip it, add captions, post.",
+      metric: "Avg 6/1k views",
+      clips: ["Scan for strong opinions", "Add bold captions", "One hook in the first 3s", "Finance & tech pay highest"],
+      mobile: {
+        pain: "One hot take can carry a whole day of views.",
+        fix: "Clip the strongest opinion; bold captions; ship.",
+        clips: ["Strong opinions", "First-3s hook"],
+      },
+    },
+    {
+      label: "Streamers",
+      color: "#06b6d4",
+      pain: "Streamers go live for hours — most clippers ignore them. That's your edge.",
+      fix: "Watch stream VODs, find the hype moments, and post fast. The first clipper to post a moment wins.",
+      metric: "Avg 7/1k views",
+      clips: ["Check VODs within 6 hours", "Hype & rage clips work best", "Keep it under 30s", "Use their catchphrases"],
+      mobile: {
+        pain: "Long streams = underrated clip gold.",
+        fix: "Hit VODs early; first clean cut often wins.",
+        clips: ["Within 6 hours", "<30s hype"],
+      },
+    },
+    {
+      label: "News",
+      color: GREEN,
+      pain: "News clips pay fast — short campaigns, quick turnaround, and breaking content always gets views.",
+      fix: "News micro-bounties open and close within hours. These are small clips (15-30 sec) with fast payouts.",
+      metric: "Avg 5/1k views",
+      clips: ["Enable push alerts", "Keep edits minimal", "Post within 2 hours", "Subtitles essential"],
+      mobile: {
+        pain: "News bounties are short windows, real payouts.",
+        fix: "15–30s clips; turn around in hours.",
+        clips: ["Push alerts on", "Subs on every clip"],
+      },
+    },
+    {
+      label: "Music",
+      color: "#ec4899",
+      pain: "Music clips are fun, fast to make, and the algo loves them.",
+      fix: "Clip the catchiest 15-30 seconds. Post as Reel using original audio. Trending audio = passive earning.",
+      metric: "Avg 8/1k views",
+      clips: ["Use original audio track", "Clip the hook/chorus", "Dance trends perform best", "Longest earning tail"],
+      mobile: {
+        pain: "Music clips reward speed and hooks.",
+        fix: "15–30s hook + original audio on Reels.",
+        clips: ["Hook / chorus", "Dance trends"],
+      },
+    },
   ];
 
   const niches = isCreator ? creatorNiches : clipperNiches;
   const n = niches[active];
+  const copy = compactForWhomContent ? n.mobile : { pain: n.pain, fix: n.fix, clips: n.clips };
   const ActiveIcon = nicheIcons[active];
   const youtubeClips = nicheYoutubeVideos[active] ?? [];
+  const youtubeClipsToShow = compactForWhomContent ? youtubeClips.slice(0, 2) : youtubeClips;
 
   const colorRgb = (c: string) => {
     if (c === ORANGE) return "249,115,22";
@@ -211,15 +360,31 @@ export default function ForWhomSection({ isCreator }: Props) {
 
   return (
     <section ref={sectionRef} id="for-whom" className="landing-section-pad" style={{ maxWidth: 1120, margin: "0 auto" }}>
-      <div style={{ textAlign: "center", marginBottom: 48 }}>
-        <div className="section-badge reveal" style={{ marginBottom: 24 }}>
+      <div style={{ textAlign: "center", marginBottom: compactForWhomContent ? 32 : 48 }}>
+        <div className="section-badge reveal" style={{ marginBottom: compactForWhomContent ? 16 : 24 }}>
           {isCreator ? "Built for your niche" : "Pick your campaign niche"}
         </div>
         <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0 0 12px" }}>
           {isCreator ? <>Who is Clipr <span style={{ color: ORANGE }}>made for?</span></> : <>Which niche <span style={{ color: GREEN }}>should you clip?</span></>}
         </h2>
-        <p className="reveal" style={{ fontSize: 15, color: TEXT_SECONDARY, lineHeight: 1.65, maxWidth: 500, margin: "0 auto" }}>
-          {isCreator ? "Every creator type has a different pain. Clipr has a specific fix for each." : "Different niches, different strategies, different earnings."}
+        <p
+          className="reveal"
+          style={{
+            fontSize: compactForWhomContent ? 13 : 15,
+            color: TEXT_SECONDARY,
+            lineHeight: 1.55,
+            maxWidth: compactForWhomContent ? 340 : 500,
+            margin: "0 auto",
+            paddingInline: compactForWhomContent ? 8 : 0,
+          }}
+        >
+          {compactForWhomContent
+            ? isCreator
+              ? "Each niche gets a focused fix—pick yours below."
+              : "Each niche pays differently—tap one to see the playbook."
+            : isCreator
+              ? "Every creator type has a different pain. Clipr has a specific fix for each."
+              : "Different niches, different strategies, different earnings."}
         </p>
       </div>
 
@@ -278,13 +443,14 @@ export default function ForWhomSection({ isCreator }: Props) {
         })}
       </div>
 
-      {youtubeClips.length > 0 && (
+      {youtubeClipsToShow.length > 0 && (
         <div
-          key={`yt-${active}-${isCreator ? "c" : "k"}`}
-          className="grid-3col"
+          key={`yt-${active}-${isCreator ? "c" : "k"}-${compactForWhomContent ? "m" : "d"}`}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+            gridTemplateColumns: compactForWhomContent
+              ? "minmax(0, 1fr)"
+              : "repeat(3, minmax(0, 1fr))",
             gap: 16,
             marginBottom: 24,
             maxWidth: 1120,
@@ -292,7 +458,7 @@ export default function ForWhomSection({ isCreator }: Props) {
             marginRight: "auto",
           }}
         >
-          {youtubeClips.map((clip, i) => (
+          {youtubeClipsToShow.map((clip, i) => (
             <YoutubeEmbed key={`${active}-${i}-${clip.id}`} videoId={clip.id} title={clip.title} />
           ))}
         </div>
@@ -308,26 +474,78 @@ export default function ForWhomSection({ isCreator }: Props) {
 
         <div className="niche-content-grid">
           {/* Pain + Fix */}
-          <div style={{ padding: "28px 28px", borderRight: `1px solid ${BORDER}` }}>
-            <div style={{ fontSize: 10, color: TEXT_MUTED, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: 12 }}>
-              {isCreator ? "The pain" : "Why this niche"}
-            </div>
-            <p style={{ fontSize: 15, color: CREAM, lineHeight: 1.7, borderLeft: `2px solid rgba(${colorRgb(n.color)},0.4)`, paddingLeft: 14, margin: "0 0 24px" }}>
-              &ldquo;{n.pain}&rdquo;
+          <div
+            style={{
+              padding: compactForWhomContent ? "18px 18px" : "28px 28px",
+              borderRight: `1px solid ${BORDER}`,
+            }}
+          >
+            {!compactForWhomContent && (
+              <div style={{ fontSize: 10, color: TEXT_MUTED, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: 12 }}>
+                {isCreator ? "The pain" : "Why this niche"}
+              </div>
+            )}
+            <p
+              style={{
+                fontSize: compactForWhomContent ? 13 : 15,
+                color: CREAM,
+                lineHeight: 1.55,
+                borderLeft: `2px solid rgba(${colorRgb(n.color)},0.4)`,
+                paddingLeft: compactForWhomContent ? 10 : 14,
+                margin: compactForWhomContent ? "0 0 14px" : "0 0 24px",
+              }}
+            >
+              {compactForWhomContent ? copy.pain : <>&ldquo;{copy.pain}&rdquo;</>}
             </p>
-            <div style={{ fontSize: 10, color: TEXT_MUTED, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: 12 }}>
-              {isCreator ? "The Clipr fix" : "Your strategy"}
-            </div>
-            <p style={{ fontSize: 14, color: TEXT_SECONDARY, lineHeight: 1.7, margin: 0 }}>{n.fix}</p>
+            {!compactForWhomContent && (
+              <div style={{ fontSize: 10, color: TEXT_MUTED, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: 12 }}>
+                {isCreator ? "The Clipr fix" : "Your strategy"}
+              </div>
+            )}
+            <p style={{ fontSize: compactForWhomContent ? 12 : 14, color: TEXT_SECONDARY, lineHeight: 1.55, margin: 0 }}>
+              {compactForWhomContent ? (
+                <>
+                  <span style={{ color: n.color, fontWeight: 700 }}>{isCreator ? "Fix: " : "Play: "}</span>
+                  {copy.fix}
+                </>
+              ) : (
+                copy.fix
+              )}
+            </p>
           </div>
 
           {/* Clips / tips */}
-          <div style={{ padding: "28px 24px", borderRight: `1px solid ${BORDER}` }}>
-            <div style={{ fontSize: 10, color: TEXT_MUTED, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: 16 }}>
+          <div
+            style={{
+              padding: compactForWhomContent ? "18px 16px" : "28px 24px",
+              borderRight: `1px solid ${BORDER}`,
+            }}
+          >
+            <div
+              style={{
+                fontSize: 10,
+                color: TEXT_MUTED,
+                fontWeight: 700,
+                letterSpacing: "1.5px",
+                textTransform: "uppercase",
+                marginBottom: compactForWhomContent ? 10 : 16,
+              }}
+            >
               {isCreator ? "Clip types" : "Strategy tips"}
             </div>
-            {n.clips.map((c, i) => (
-              <div key={c} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: CREAM, padding: "8px 0", borderBottom: i < n.clips.length - 1 ? `1px solid ${BORDER}` : undefined }}>
+            {copy.clips.map((c, i) => (
+              <div
+                key={c}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  fontSize: compactForWhomContent ? 12 : 14,
+                  color: CREAM,
+                  padding: compactForWhomContent ? "6px 0" : "8px 0",
+                  borderBottom: i < copy.clips.length - 1 ? `1px solid ${BORDER}` : undefined,
+                }}
+              >
                 <div style={{ width: 6, height: 6, borderRadius: "50%", background: n.color, flexShrink: 0, opacity: 0.8 }} />
                 {c}
               </div>
@@ -335,16 +553,49 @@ export default function ForWhomSection({ isCreator }: Props) {
           </div>
 
           {/* Metric panel */}
-          <div style={{ padding: "28px 20px", background: `rgba(${colorRgb(n.color)},0.04)`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 10 }}>
-            <div style={{ width: 56, height: 56, borderRadius: 14, background: `rgba(${colorRgb(n.color)},0.1)`, border: `1px solid rgba(${colorRgb(n.color)},0.2)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <ActiveIcon color={n.color} size={28} />
+          <div
+            style={{
+              padding: compactForWhomContent ? "18px 16px" : "28px 20px",
+              background: `rgba(${colorRgb(n.color)},0.04)`,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              gap: compactForWhomContent ? 8 : 10,
+            }}
+          >
+            <div
+              style={{
+                width: compactForWhomContent ? 48 : 56,
+                height: compactForWhomContent ? 48 : 56,
+                borderRadius: 14,
+                background: `rgba(${colorRgb(n.color)},0.1)`,
+                border: `1px solid rgba(${colorRgb(n.color)},0.2)`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ActiveIcon color={n.color} size={compactForWhomContent ? 24 : 28} />
             </div>
-            <div style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: 18, color: n.color, letterSpacing: -0.5, lineHeight: 1.3 }}>
+            <div
+              style={{
+                fontFamily: "var(--font-montserrat), sans-serif",
+                fontWeight: 800,
+                fontSize: compactForWhomContent ? 15 : 18,
+                color: n.color,
+                letterSpacing: -0.5,
+                lineHeight: 1.3,
+              }}
+            >
               {n.metric}
             </div>
-            <div style={{ fontSize: 11, color: TEXT_MUTED, lineHeight: 1.4 }}>
-              {isCreator ? "across early beta campaigns" : "typical earning rate"}
-            </div>
+            {!compactForWhomContent && (
+              <div style={{ fontSize: 11, color: TEXT_MUTED, lineHeight: 1.4 }}>
+                {isCreator ? "across early beta campaigns" : "typical earning rate"}
+              </div>
+            )}
           </div>
         </div>
       </div>

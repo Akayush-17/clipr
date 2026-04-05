@@ -119,6 +119,24 @@ body {
   transform: translateY(-2px) translateX(2px);
 }
 
+/* Full-width mocks: flush to viewport — no radius or border on mobile */
+@media (max-width: 768px) {
+  .antigrid-card--mobile-square {
+    border-radius: 0;
+    border: none;
+  }
+}
+
+.dashboard-sneak-fade {
+  border-radius: 0 0 16px 16px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-sneak-fade {
+    border-radius: 0;
+  }
+}
+
 /* ── Card dark (simpler variant) ── */
 .card-dark {
   background: #141414;
