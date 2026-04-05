@@ -15,7 +15,7 @@ export default function DashboardSection() {
   ];
 
   return (
-    <section ref={sectionRef as any} id="dashboard" style={{ maxWidth: 1120, margin: "0 auto", padding: "96px 24px" }}>
+    <section ref={sectionRef as any} id="dashboard" className="landing-section-pad" style={{ maxWidth: 1120, margin: "0 auto" }}>
       <div style={{ textAlign: "center", marginBottom: 48 }}>
         <div className="section-badge reveal" style={{ marginBottom: 24 }}>Sneak peek</div>
         <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0 0 12px" }}>

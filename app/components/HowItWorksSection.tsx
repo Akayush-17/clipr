@@ -129,7 +129,7 @@ export default function HowItWorksSection() {
   };
 
   return (
-    <section ref={sectionRef as any} id="how-it-works" style={{ maxWidth: 1120, margin: "0 auto", padding: "64px 24px 96px" }}>
+    <section ref={sectionRef as any} id="how-it-works" className="landing-section-pad--how" style={{ maxWidth: 1120, margin: "0 auto" }}>
       <div style={{ textAlign: "center", marginBottom: 56 }}>
         <div className="section-badge reveal" style={{ marginBottom: 24 }}>The lifecycle of a clip</div>
         <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", lineHeight: "120%", color: CREAM, margin: "0" }}>

@@ -253,27 +253,36 @@ export default function Hero({ role, onRoleChange }: Props) {
           zIndex: 2,
           justifyContent: "center",
           flexWrap: "wrap",
+          width: "100%",
         }}
       >
         <div
+          className={isCreator ? undefined : "hero-mock-hide-on-mobile"}
           style={{
             opacity: isCreator ? 1 : 0.3,
             transform: isCreator ? "scale(1)" : "scale(0.95)",
             transition: "all .4s cubic-bezier(0.4,0,0.2,1)",
             filter: isCreator ? "none" : "blur(1px)",
+            flexShrink: 0,
           }}
         >
-          <DashboardMockInline />
+          <div style={{ maxWidth: "100%", width: "min(320px, 100vw - 48px)" }}>
+            <DashboardMockInline />
+          </div>
         </div>
         <div
+          className={isCreator ? "hero-mock-hide-on-mobile" : undefined}
           style={{
             opacity: !isCreator ? 1 : 0.3,
             transform: !isCreator ? "scale(1)" : "scale(0.95)",
             transition: "all .4s cubic-bezier(0.4,0,0.2,1)",
             filter: !isCreator ? "none" : "blur(1px)",
+            flexShrink: 0,
           }}
         >
-          <MobileMockInline />
+          <div style={{ maxWidth: "100%", width: "min(280px, 100vw - 48px)" }}>
+            <MobileMockInline />
+          </div>
         </div>
       </div>
 
@@ -304,7 +313,8 @@ function DashboardMockInline() {
         border: "2px solid #141414",
         borderRadius: 16,
         overflow: "hidden",
-        width: 320,
+        width: "100%",
+        maxWidth: 320,
         boxShadow: "7px 11px 38px 0 rgba(0,0,0,0.8)",
       }}
     >
@@ -365,7 +375,8 @@ function MobileMockInline() {
         border: "2px solid #141414",
         borderRadius: 16,
         overflow: "hidden",
-        width: 280,
+        width: "100%",
+        maxWidth: 280,
         boxShadow: "7px 11px 38px 0 rgba(0,0,0,0.8)",
       }}
     >

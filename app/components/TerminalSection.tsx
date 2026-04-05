@@ -11,12 +11,11 @@ export default function TerminalSection() {
     <section
       ref={sectionRef as any}
       id="anti-fraud"
-      className="terminal-grid"
+      className="terminal-grid landing-section-pad--terminal"
       style={{
         maxWidth: 1120,
         width: "100%",
         margin: "0 auto",
-        padding: "48px 24px 96px",
         boxSizing: "border-box",
         display: "grid",
         gridTemplateColumns: "1fr 1fr",

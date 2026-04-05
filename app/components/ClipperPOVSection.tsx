@@ -119,7 +119,7 @@ export default function ClipperPOVSection() {
   ];
 
   return (
-    <section ref={sectionRef as any} style={{ maxWidth: 1120, margin: "0 auto", padding: "96px 24px" }}>
+    <section ref={sectionRef as any} className="landing-section-pad" style={{ maxWidth: 1120, margin: "0 auto" }}>
       <div className="section-badge reveal" style={{ marginBottom: 28 }}>Clipper&apos;s perspective</div>
 
       <h2 className="reveal" style={{ fontFamily: "var(--font-montserrat), sans-serif", fontWeight: 800, fontSize: "clamp(28px,4vw,34px)", letterSpacing: "-0.05em", marginBottom: 10, lineHeight: "120%", color: CREAM, margin: "0 0 10px" }}>

@@ -19,6 +19,47 @@ body {
   box-sizing: border-box;
 }
 
+/* Landing page section padding — on mobile, only vertical is tightened; horizontal stays 24px */
+.landing-section-pad {
+  padding: 96px 24px;
+}
+.landing-section-pad--promo {
+  padding: 72px 24px 96px;
+}
+.landing-section-pad--how {
+  padding: 64px 24px 96px;
+}
+.landing-section-pad--waitlist {
+  padding: 96px 24px 120px;
+}
+.landing-section-pad--terminal {
+  padding: 48px 24px 96px;
+}
+.landing-section-pad--midcta {
+  padding: 48px 24px;
+}
+
+@media (max-width: 768px) {
+  .landing-section-pad {
+    padding: 52px 24px;
+  }
+  .landing-section-pad--promo {
+    padding: 40px 24px 52px;
+  }
+  .landing-section-pad--how {
+    padding: 40px 24px 52px;
+  }
+  .landing-section-pad--waitlist {
+    padding: 52px 24px 68px;
+  }
+  .landing-section-pad--terminal {
+    padding: 32px 24px 52px;
+  }
+  .landing-section-pad--midcta {
+    padding: 28px 24px;
+  }
+}
+
 /* ── Keyframes ── */
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(12px); }
@@ -263,6 +304,13 @@ input[type="range"]::-webkit-slider-thumb {
   }
 }
 
+/* Hero: show only the dashboard mock that matches Creator / Clipper toggle */
+@media (max-width: 768px) {
+  .hero-mock-hide-on-mobile {
+    display: none !important;
+  }
+}
+
 .steps-flow {
   grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr !important;
 }
@@ -276,13 +324,20 @@ input[type="range"]::-webkit-slider-thumb {
   }
 }
 
-/* Niche icon row: centered, wraps on smaller viewports */
+/* Niche icon row: single line; horizontal scroll when needed */
 .niche-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: stretch;
   gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.niche-grid::-webkit-scrollbar {
+  display: none;
 }
 
 /* Content card inner 3-col → stacked on mobile */
@@ -334,8 +389,9 @@ input[type="range"]::-webkit-slider-thumb {
   }
 
   .niche-grid {
-    gap: 8px;
     justify-content: center;
+    max-width: 100%;
+    padding-inline: 2px;
   }
 
   .niche-content-grid {

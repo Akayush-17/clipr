@@ -54,7 +54,7 @@ export default function VsUGCSection({ isCreator }: Props) {
   const rows = isCreator ? CREATOR_ROWS : CLIPPER_ROWS;
 
   return (
-    <section ref={sectionRef as any} style={{ maxWidth: 1120, margin: "0 auto", padding: "96px 24px" }}>
+    <section ref={sectionRef as any} className="landing-section-pad" style={{ maxWidth: 1120, margin: "0 auto" }}>
       <div style={{ textAlign: "center", marginBottom: 48 }}>
         <div className="section-badge reveal" style={{ marginBottom: 24 }}>
           Why Clipr is different

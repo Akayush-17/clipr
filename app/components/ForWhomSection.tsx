@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { CREAM, GREEN, ORANGE, BORDER, TEXT_SECONDARY, TEXT_MUTED } from "../constants/theme";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
@@ -158,9 +158,26 @@ function YoutubeEmbed({ videoId, title }: { videoId: string; title: string }) {
   );
 }
 
+const NICHE_PILL_MQ = "(max-width: 900px)";
+
+function subscribeCompactNichePills(callback: () => void) {
+  const mq = window.matchMedia(NICHE_PILL_MQ);
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+
+function snapshotCompactNichePills() {
+  return typeof window !== "undefined" && window.matchMedia(NICHE_PILL_MQ).matches;
+}
+
 export default function ForWhomSection({ isCreator }: Props) {
   const [active, setActive] = useState(0);
   const sectionRef = useScrollReveal();
+  const compactNichePills = useSyncExternalStore(
+    subscribeCompactNichePills,
+    snapshotCompactNichePills,
+    () => false,
+  );
 
   const creatorNiches = [
     { label: "Gamers", color: "#8b5cf6", pain: "Your best clutch moments never get seen beyond your stream.", fix: "Clippers cut your highlights into Reels & Shorts. Every kill, every win — on 50 channels overnight.", metric: "Avg +2.4L views per campaign", clips: ["Best kills compilation", "Tutorial clips", "Reaction shorts", "Stream highlights"] },
@@ -193,7 +210,7 @@ export default function ForWhomSection({ isCreator }: Props) {
   };
 
   return (
-    <section ref={sectionRef} id="for-whom" style={{ maxWidth: 1120, margin: "0 auto", padding: "96px 24px" }}>
+    <section ref={sectionRef} id="for-whom" className="landing-section-pad" style={{ maxWidth: 1120, margin: "0 auto" }}>
       <div style={{ textAlign: "center", marginBottom: 48 }}>
         <div className="section-badge reveal" style={{ marginBottom: 24 }}>
           {isCreator ? "Built for your niche" : "Pick your campaign niche"}
@@ -207,20 +224,30 @@ export default function ForWhomSection({ isCreator }: Props) {
       </div>
 
       {/* Niche icon row — centered (see `.niche-grid` in globals.css) */}
-      <div className="niche-grid reveal-card" style={{ marginBottom: 32, maxWidth: 920, marginLeft: "auto", marginRight: "auto" }}>
+      <div
+        className="niche-grid reveal-card"
+        style={{
+          marginBottom: 32,
+          maxWidth: "min(920px, 100%)",
+          marginLeft: "auto",
+          marginRight: "auto",
+          gap: compactNichePills ? 4 : 8,
+        }}
+      >
         {niches.map((ni, i) => {
           const Icon = nicheIcons[i];
           return (
             <button
               key={ni.label}
               type="button"
+              className="niche-pill-btn"
               onClick={() => setActive(i)}
               style={{
-                flex: "0 1 auto",
-                minWidth: 100,
-                maxWidth: 160,
-                padding: "18px 12px",
-                borderRadius: 14,
+                flex: "0 0 auto",
+                minWidth: compactNichePills ? 64 : 100,
+                maxWidth: compactNichePills ? 98 : 160,
+                padding: compactNichePills ? "9px 5px" : "18px 12px",
+                borderRadius: compactNichePills ? 10 : 14,
                 border: `2px solid ${active === i ? ni.color : "#141414"}`,
                 background: active === i ? `rgba(${colorRgb(ni.color)},0.08)` : "#141414",
                 color: active === i ? ni.color : TEXT_MUTED,
@@ -229,12 +256,23 @@ export default function ForWhomSection({ isCreator }: Props) {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 10,
+                gap: compactNichePills ? 5 : 10,
                 textAlign: "center",
+                WebkitTapHighlightColor: "transparent",
               }}
             >
-              <Icon color={active === i ? ni.color : TEXT_MUTED} size={28} />
-              <span style={{ fontSize: 12, fontWeight: 600, letterSpacing: "-0.02em" }}>{ni.label}</span>
+              <Icon color={active === i ? ni.color : TEXT_MUTED} size={compactNichePills ? 20 : 28} />
+              <span
+                style={{
+                  fontSize: compactNichePills ? 9 : 12,
+                  fontWeight: 600,
+                  letterSpacing: compactNichePills ? "-0.03em" : "-0.02em",
+                  lineHeight: compactNichePills ? 1.15 : 1.2,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {ni.label}
+              </span>
             </button>
           );
         })}

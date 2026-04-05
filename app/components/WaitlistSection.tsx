@@ -11,7 +11,8 @@ export default function WaitlistSection() {
     <section
       ref={sectionRef as any}
       id="waitlist"
-      style={{ padding: "96px 24px 120px", position: "relative", overflow: "hidden" }}
+      className="landing-section-pad--waitlist"
+      style={{ position: "relative", overflow: "hidden" }}
     >
       {/* Subtle radial glow */}
       <div

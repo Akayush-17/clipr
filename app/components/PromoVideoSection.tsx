@@ -10,7 +10,8 @@ export default function PromoVideoSection() {
     <section
       ref={sectionRef}
       id="product-tour"
-      style={{ maxWidth: 1120, margin: "0 auto", padding: "72px 24px 96px" }}
+      className="landing-section-pad--promo"
+      style={{ maxWidth: 1120, margin: "0 auto" }}
     >
       <div style={{ textAlign: "center", marginBottom: 40 }}>
         <div className="section-badge reveal" style={{ marginBottom: 24 }}>

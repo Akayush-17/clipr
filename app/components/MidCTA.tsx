@@ -21,8 +21,8 @@ export default function MidCTA({ isCreator }: { isCreator: boolean }) {
   return (
     <section
       ref={ref as any}
+      className="landing-section-pad--midcta"
       style={{
-        padding: "48px 24px",
         display: "flex",
         justifyContent: "center",
       }}
